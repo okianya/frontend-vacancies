@@ -3,11 +3,11 @@ import { VacancyCard } from '../../components/VacancyCard/VacancyCard';
 import { useTypedSelector } from '../../hooks/reduxHooks';
 
 export const VacanciesList = () => {
-	const { vacancies, loading, error } = useTypedSelector(
+	const { vacancies, loading, error, isLoaded } = useTypedSelector(
 		(state) => state.vacancies,
 	);
 
-	if (loading) {
+	if (!isLoaded && loading) {
 		return (
 			<div
 				style={{ display: 'flex', justifyContent: 'center', padding: '4rem 0' }}

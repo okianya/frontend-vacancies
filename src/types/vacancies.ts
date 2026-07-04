@@ -1,5 +1,5 @@
 export type Vacancies = {
-	id: number;
+	id: string | number;
 	name: string;
 	salary: string;
 	experience: string;

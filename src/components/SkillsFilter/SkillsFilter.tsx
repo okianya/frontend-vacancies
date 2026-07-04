@@ -1,21 +1,37 @@
 import { Card, Text, ActionIcon, Input, Flex } from '@mantine/core';
 import { SkillsPills } from '../../components/SkillsPills/SkillsPills';
 import { PlusIcon } from '@phosphor-icons/react';
-import { useTypedDispatch } from '../../hooks/reduxHooks';
-import { useState } from 'react';
-import { addSkill } from '../../store/filtersSlice';
+import { useTypedDispatch, useTypedSelector } from '../../hooks/reduxHooks';
+import { useCallback, useState } from 'react';
+import { setSkills } from '../../store/filtersSlice';
+import { useSearchParams } from 'react-router';
 
 export const SkillsFilter = () => {
 	const dispatch = useTypedDispatch();
-
+	const [searchParams, setSearchParams] = useSearchParams();
 	const [newSkill, setNewSkill] = useState('');
 
-	const handleAddSkill = () => {
-		if (newSkill.trim()) {
-			dispatch(addSkill(newSkill));
+	const currentSkills = useTypedSelector((state) => state.filters.skills);
+
+	const addSkill = useCallback(
+		(skill: string) => {
+			const trimmed = skill.trim();
+			if (!trimmed) return;
+
+			const newSkills = [...currentSkills, trimmed];
+
+			const params = new URLSearchParams(searchParams);
+			params.set('skills', newSkills.join(','));
+			setSearchParams(params, { replace: true });
+
+			dispatch(setSkills(newSkills));
+
 			setNewSkill('');
-		}
-	};
+		},
+		[currentSkills, searchParams, setSearchParams, dispatch],
+	);
+
+	const handleAddSkill = () => addSkill(newSkill);
 
 	return (
 		<>

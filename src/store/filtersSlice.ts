@@ -19,6 +19,10 @@ const filtersSlice = createSlice({
 			state.city = action.payload;
 		},
 
+		setSkills: (state, action: PayloadAction<string[]>) => {
+			state.skills = action.payload;
+		},
+
 		addSkill: (state, action: PayloadAction<string>) => {
 			const skill = action.payload.trim();
 
@@ -33,7 +37,7 @@ const filtersSlice = createSlice({
 	},
 });
 
-export const { setSearch, setCity, addSkill, removeSkill } =
+export const { setSearch, setCity, setSkills, addSkill, removeSkill } =
 	filtersSlice.actions;
 
 export default filtersSlice.reducer;

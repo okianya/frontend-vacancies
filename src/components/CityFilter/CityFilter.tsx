@@ -2,14 +2,31 @@ import { Card, Select } from '@mantine/core';
 import { MapPinIcon } from '@phosphor-icons/react';
 import { useTypedDispatch, useTypedSelector } from '../../hooks/reduxHooks';
 import { setCity } from '../../store/filtersSlice';
+import { useCallback } from 'react';
+import { useSearchParams } from 'react-router';
 
 export const CityFilter = () => {
-	const city = useTypedSelector((state) => state.filters.city);
 	const dispatch = useTypedDispatch();
+	const [searchParams, setSearchParams] = useSearchParams();
+	const city = useTypedSelector((state) => state.filters.city);
 
-	const handleCityChange = (value: string | null) => {
-		if (value) dispatch(setCity(value));
-	};
+	const handleCityChange = useCallback(
+		(value: string | null) => {
+			if (!value) return;
+
+			const params = new URLSearchParams(searchParams);
+
+			if (value && value !== 'Все города') {
+				params.set('city', value);
+			} else {
+				params.delete('city');
+			}
+
+			setSearchParams(params, { replace: true });
+			dispatch(setCity(value));
+		},
+		[searchParams, setSearchParams, dispatch],
+	);
 
 	return (
 		<Card shadow="sm" padding="lg" w={320}>

@@ -1,10 +1,18 @@
-import { Group, Image, Text, Button } from '@mantine/core';
-import logo from '../../assets/logo.svg';
+import { Group, Text, Image, Button } from '@mantine/core';
 import { UserCircleIcon } from '@phosphor-icons/react';
+import logo from '../../assets/logo.png';
 
 export const Header = () => {
 	return (
-		<Group h="100%" px="md" align="center">
+		<Group
+			px="md"
+			align="center"
+			h="100%"
+			style={{
+				boxShadow: '0px 2px 22.5px 0px #1C1D1F0D',
+				backgroundColor: '#FFFFFF',
+			}}
+		>
 			<Image src={logo} w={120} alt="logo" />
 
 			<Group gap="xl" style={{ flex: 1, justifyContent: 'center' }}>
