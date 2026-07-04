@@ -1,2 +1,2 @@
-4.2.3 Проверяемое задание «Сайт вакансий» - Митенко Анна 
+5.2.5 Проверяемое задание «URL-параметры и search-параметры» - Митенко Анна
 [frontend-vacancies.vercel.app](https://frontend-vacancies.vercel.app/)
