@@ -77,7 +77,6 @@ const vacanciesSlice = createSlice({
 			.addCase(fetchVacancies.fulfilled, (state, action) => {
 				state.loading = false;
 				state.vacancies = action.payload;
-				state.currentVacancy = action.payload;
 				state.isLoaded = true;
 			})
 

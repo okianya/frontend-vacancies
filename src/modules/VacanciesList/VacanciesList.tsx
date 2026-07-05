@@ -1,6 +1,7 @@
 import { Group, Loader, Alert, Text } from '@mantine/core';
 import { VacancyCard } from '../../components/VacancyCard/VacancyCard';
 import { useTypedSelector } from '../../hooks/reduxHooks';
+import { CityFilter } from '../../components/CityFilter/CityFilter';
 
 export const VacanciesList = () => {
 	const { vacancies, loading, error, isLoaded } = useTypedSelector(
@@ -28,14 +29,17 @@ export const VacanciesList = () => {
 	}
 
 	return (
-		<Group justify="flex-end">
-			<ul>
-				{vacancies.map((job) => (
-					<li key={job.id}>
-						<VacancyCard {...job} />
-					</li>
-				))}
-			</ul>
-		</Group>
+		<>
+			<Group justify="flex-end">
+				<CityFilter />
+				<ul>
+					{vacancies.map((job) => (
+						<li key={job.id}>
+							<VacancyCard {...job} />
+						</li>
+					))}
+				</ul>
+			</Group>
+		</>
 	);
 };
